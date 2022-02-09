@@ -1,2 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿// サンプル
+
+var tesutoString = "5 6 * 3 +";
+
+var calculator = new Calculator.Calculator(tesutoString);
+
+while (calculator.DoCalc()) { }
+calculator.DisplayStack();

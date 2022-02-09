@@ -1,4 +1,4 @@
-﻿namespace Calculator
+﻿namespace Calculator.RPNComponents
 {
     /// <summary>
     /// 逆ポーランド計算用のスタックに積むことができるクラスに実装するインターフェース
@@ -10,6 +10,12 @@
         /// </summary>
         /// <param name="calculationTargets"></param>
         void Execute(Stack<ICalculationTarget> calculationTargets);
+
+        /// <summary>
+        /// 画面に実際に表示する値に変換する
+        /// </summary>
+        /// <returns></returns>
+        string Display();
     }
 
     /// <summary>
@@ -47,6 +53,8 @@
             calculationTargets.Push(
                 new NumberTarget(basicCalcResult.Denominator, basicCalcResult.Numerator));
         }
+
+        public abstract string Display();
 
         public abstract void Execute(Stack<ICalculationTarget> calculationTargets);
 

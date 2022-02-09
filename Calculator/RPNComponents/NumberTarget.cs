@@ -1,4 +1,4 @@
-﻿namespace Calculator
+﻿namespace Calculator.RPNComponents
 {
     /// <summary>
     /// 数値全般を表すクラス
@@ -32,5 +32,26 @@
         /// <param name="stackTarget">操作するスタック</param>
         public void Execute(Stack<ICalculationTarget> stackTarget)
             => stackTarget.Push(this);
+
+        /// <summary>
+        /// 少数点表示で数値の文字列を表示する
+        /// </summary>
+        /// <returns></returns>
+        public string DisplayWithDecimalShape()
+            => (Numerator / Denominator).ToString();
+
+        /// <summary>
+        /// 分数表示で数値の文字列を表示する
+        /// </summary>
+        /// <returns></returns>
+        public string DisplayWithFractionShape()
+            => (Denominator == 1) ? Numerator.ToString() : $"{Numerator}/{Denominator}";
+
+        /// <summary>
+        /// 実際の画面に表示する形式を出力する
+        /// </summary>
+        /// <returns></returns>
+        public string Display()
+            => DisplayWithFractionShape();
     }
 }

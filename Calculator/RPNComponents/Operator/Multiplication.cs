@@ -1,10 +1,12 @@
-﻿namespace Calculator
+﻿namespace Calculator.RPNComponents.Operator
 {
     /// <summary>
     /// 乗算を扱うクラス
     /// </summary>
     internal class Multiplication : BasicOperator
     {
+        private static readonly string NAME = "*";
+
         /// <summary>
         /// 指定したスタックから2つの値を取り出し、乗算を行ってスタックに返す
         /// </summary>
@@ -19,5 +21,12 @@
                 Denominator = numberTarget1.Denominator * numberTarget2.Denominator,
                 Numerator = numberTarget1.Numerator * numberTarget2.Numerator,
             };
+
+        /// <summary>
+        /// 実際の画面に表示する形式「*」を返す
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public override string Display() => NAME;
     }
 }

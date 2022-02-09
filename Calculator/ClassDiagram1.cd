@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Calculator.CalculationHelper" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CalculationHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator.Calculator" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAACAAAAAAAAEAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Calculator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator.ReversePolishNotationParser" Collapsed="true">
+    <Position X="13.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>ReversePolishNotationParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator.RPNComponents.BasicOperator">
+    <Position X="3.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Calculator.RPNComponents.BasicOperator.NumberModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RPNComponents\ICalculationTarget.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RPNComponents\ICalculationTarget.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Calculator.RPNComponents.ConditionTarget" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RPNComponents\ConditionTarget.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Calculator.RPNComponents.FunctionTarget" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RPNComponents\FunctionTarget.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Calculator.RPNComponents.NumberTarget" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAQAAAAAAYAAAAAAAAACIAAAAAAAAAA=</HashCode>
+      <FileName>RPNComponents\NumberTarget.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Calculator.RPNComponents.Operator.Addition">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>RPNComponents\Operator\Addition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator.RPNComponents.Operator.Divison">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>RPNComponents\Operator\Divison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator.RPNComponents.Operator.Multiplication">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>RPNComponents\Operator\Multiplication.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator.RPNComponents.Operator.Subtraction">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAACAAAAEA=</HashCode>
+      <FileName>RPNComponents\Operator\Subtraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator.RPNException.RuntimeException" Collapsed="true">
+    <Position X="9.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RPNException\RuntimeException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Calculator.RPNException.SyntaxException" Collapsed="true">
+    <Position X="11.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RPNException\SyntaxException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Calculator.RPNComponents.ICalculationTarget" Collapsed="true">
+    <Position X="9.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RPNComponents\ICalculationTarget.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>
