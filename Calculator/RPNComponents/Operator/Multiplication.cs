@@ -28,5 +28,16 @@
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         public override string Display() => NAME;
+
+        /// <summary>
+        /// tokenが「*」かどうかを識別し、正ならば自身を返す
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="calculationTargets"></param>
+        /// <returns></returns>
+        public override ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets)
+        {
+            return (token == NAME) ? this : calculationTargets.Pop().IsItself(token, calculationTargets);
+        }
     }
 }

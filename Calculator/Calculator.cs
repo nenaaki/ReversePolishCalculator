@@ -1,4 +1,5 @@
 ﻿using Calculator.RPNComponents;
+using Calculator.RPNComponents.Operator;
 
 namespace Calculator
 {
@@ -7,8 +8,6 @@ namespace Calculator
     /// </summary>
     public class Calculator
     {
-        private List<ICalculationTarget> _RPNComponents { get; set; } = new();
-
         private Stack<ICalculationTarget> _targetStack { get; set; } = new();
 
         /// <summary>
@@ -17,7 +16,16 @@ namespace Calculator
         /// <param name="formula"></param>
         public Calculator(string formula)
         {
-            _RPNComponents = ReversePolishNotationParser.ParseReversePolishNotation(formula);
+            _targetStack.Push(new NumberTarget(null, null));
+            _targetStack.Push(new Addition());
+            _targetStack.Push(new Multiplication());
+            _targetStack.Push(new Subtraction());
+            _targetStack.Push(new Divison());
+
+            foreach (var token in ReversePolishNotationParser.ParseReversePolishNotation(formula))
+            {
+                _targetStack.Push(_targetStack.Pop().IsItself(token, _targetStack));
+            }
         }
 
         /// <summary>
@@ -28,21 +36,9 @@ namespace Calculator
             => String.Join(" ", _targetStack.ToArray().Select(t => t.Display()));
 
         /// <summary>
-        /// 計算式を1つ実行する
+        /// スタックから最初の式を取り出して計算を開始する
         /// </summary>
-        /// <returns></returns>
-        public bool DoCalc()
-        {
-            if (!_RPNComponents.Any()) return false;
-
-            _RPNComponents[0].Execute(_targetStack);
-            _RPNComponents.RemoveAt(0);
-
-#if DEBUG
-            Console.WriteLine(DisplayStack());
-#endif
-
-            return true;
-        }
+        public void Run()
+            => _targetStack.Pop().Execute();
     }
 }

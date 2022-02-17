@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="denominator">分母</param>
         /// <param name="numerator">分子</param>
-        public NumberTarget(int denominator, int numerator)
+        public NumberTarget(double? denominator, double? numerator)
         {
             Denominator = denominator;
             Numerator = numerator;
@@ -19,12 +19,12 @@
         /// <summary>
         /// 分母
         /// </summary>
-        public int Denominator { get; }
+        public double? Denominator { get; }
 
         /// <summary>
         /// 分子
         /// </summary>
-        public int Numerator { get; }
+        public double? Numerator { get; }
 
         /// <summary>
         /// 指定したスタックにこのクラスのインスタンスをプッシュする

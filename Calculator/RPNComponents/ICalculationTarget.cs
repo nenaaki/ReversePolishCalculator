@@ -16,6 +16,15 @@
         /// </summary>
         /// <returns></returns>
         string Display();
+
+        /// <summary>
+        /// 与えられた式が自分と同じものか判定し、同じなら自分をインスタンスし返す
+        /// 異なる場合は、スタックから次の値を取り出し、その型と同じか判定する
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="calculationTargets"></param>
+        /// <returns></returns>
+        ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets);
     }
 
     /// <summary>
@@ -58,11 +67,13 @@
 
         public abstract void Execute(Stack<ICalculationTarget> calculationTargets);
 
+        public abstract ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets);
+
         public class NumberModel
         {
-            internal int Numerator { get; set; }
+            internal double? Numerator { get; set; }
 
-            internal int Denominator { get; set; }
+            internal double? Denominator { get; set; }
         }
     }
 }
