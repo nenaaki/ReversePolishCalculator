@@ -5,7 +5,17 @@
     /// </summary>
     internal class Multiplication : BasicOperator
     {
-        private static readonly string NAME = "*";
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public Multiplication()
+        { }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="isDefinitionInstance"></param>
+        public Multiplication(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
         /// <summary>
         /// 指定したスタックから2つの値を取り出し、乗算を行ってスタックに返す
@@ -18,8 +28,8 @@
         private NumberModel ExecuteMultiplication(NumberTarget numberTarget1, NumberTarget numberTarget2)
             => new()
             {
-                Denominator = numberTarget1.Denominator * numberTarget2.Denominator,
-                Numerator = numberTarget1.Numerator * numberTarget2.Numerator,
+                Denominator = (double)(numberTarget1.Denominator * numberTarget2.Denominator),
+                Numerator = (double)(numberTarget1.Numerator * numberTarget2.Numerator),
             };
 
         /// <summary>
@@ -27,7 +37,7 @@
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public override string Display() => NAME;
+        public override string Display() => (IsDefinitionInstance) ? "" : "*";
 
         /// <summary>
         /// tokenが「*」かどうかを識別し、正ならば自身を返す
@@ -36,8 +46,7 @@
         /// <param name="calculationTargets"></param>
         /// <returns></returns>
         public override ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets)
-        {
-            return (token == NAME) ? this : calculationTargets.Pop().IsItself(token, calculationTargets);
-        }
+            => (token == "*") ? new Multiplication() :
+                CalculationHelper.IsNetxPopedItself(token, calculationTargets);
     }
 }
