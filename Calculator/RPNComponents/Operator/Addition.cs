@@ -5,7 +5,17 @@
     /// </summary>
     internal class Addition : BasicOperator
     {
-        private static readonly string NAME = "+";
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public Addition()
+        { }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="isDefinitionInstance"></param>
+        public Addition(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
         /// <summary>
         /// 指定したスタックから2つ値を取り出し、加算した値をスタックに返す
@@ -18,16 +28,16 @@
         private NumberModel ExecuteAddition(NumberTarget numberTarget1, NumberTarget numberTarget2)
             => new()
             {
-                Denominator = numberTarget1.Denominator * numberTarget2.Denominator,
-                Numerator = numberTarget1.Numerator * numberTarget2.Denominator +
-                    numberTarget2.Numerator * numberTarget2.Denominator,
+                Denominator = (double)(numberTarget1.Denominator * numberTarget2.Denominator),
+                Numerator = (double)(numberTarget1.Numerator * numberTarget2.Denominator +
+                    numberTarget2.Numerator * numberTarget2.Denominator),
             };
 
         /// <summary>
         /// 実際の画面に表示する形式「+」を返す
         /// </summary>
         /// <returns></returns>
-        public override string Display() => NAME;
+        public override string Display() => (IsDefinitionInstance) ? "" : "+";
 
         /// <summary>
         /// tokenが「+」かどうかを識別し、正ならば自身を返す
@@ -36,8 +46,7 @@
         /// <param name="calculationTargets"></param>
         /// <returns></returns>
         public override ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets)
-        {
-            return (token == NAME) ? this : calculationTargets.Pop().IsItself(token, calculationTargets);
-        }
+            => (token == "+") ? new Addition() :
+                CalculationHelper.IsNetxPopedItself(token, calculationTargets);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Calculator
+﻿using Calculator.RPNComponents;
+
+namespace Calculator
 {
     /// <summary>
     /// 計算の補助に使うメソッドの集合
@@ -11,7 +13,7 @@
         /// <param name="target1">数値1</param>
         /// <param name="target2">数値2</param>
         /// <returns></returns>
-        internal static int CalcGreatestCommonDivisor(int target1, int target2)
+        internal static double CalcGreatestCommonDivisor(double target1, double target2)
         {
             if (target1 < target2)
             {
@@ -29,6 +31,23 @@
             }
 
             return target2;
+        }
+
+        /// <summary>
+        /// スタックから次を取り出し、文字列と同じものかのチェック及びインスタンス化を行う
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="calculationTargets"></param>
+        /// <returns></returns>
+        internal static ICalculationTarget IsNetxPopedItself(string token, Stack<ICalculationTarget> calculationTargets)
+        {
+            var popedTarget = calculationTargets.Pop();
+
+            var target = popedTarget.IsItself(token, calculationTargets);
+
+            calculationTargets.Push(popedTarget);
+
+            return target;
         }
     }
 }

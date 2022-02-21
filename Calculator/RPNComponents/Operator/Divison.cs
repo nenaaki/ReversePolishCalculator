@@ -7,7 +7,17 @@ namespace Calculator.RPNComponents.Operator
     /// </summary>
     internal class Divison : BasicOperator
     {
-        private static readonly string NAME = "/";
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public Divison()
+        { }
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        /// <param name="isDefinitionInstance"></param>
+        public Divison(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
         /// <summary>
         /// 指定したスタックから値を2つ取り出し、除算を行ってスタックに返す
@@ -23,8 +33,8 @@ namespace Calculator.RPNComponents.Operator
 
             return new NumberModel
             {
-                Denominator = numberTarget1.Denominator * numberTarget2.Numerator,
-                Numerator = numberTarget1.Numerator * numberTarget2.Denominator
+                Denominator = (double)(numberTarget1.Denominator * numberTarget2.Numerator),
+                Numerator = (double)(numberTarget1.Numerator * numberTarget2.Denominator)
             };
         }
 
@@ -33,7 +43,7 @@ namespace Calculator.RPNComponents.Operator
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public override string Display() => NAME;
+        public override string Display() => (IsDefinitionInstance) ? "" : "/";
 
         /// <summary>
         /// tokenが「/」かどうかを識別し、正ならば自身を返す
@@ -42,8 +52,7 @@ namespace Calculator.RPNComponents.Operator
         /// <param name="calculationTargets"></param>
         /// <returns></returns>
         public override ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets)
-        {
-            return (token == NAME) ? this : calculationTargets.Pop().IsItself(token, calculationTargets);
-        }
+            => (token == "/") ? new Divison() :
+                CalculationHelper.IsNetxPopedItself(token, calculationTargets);
     }
 }

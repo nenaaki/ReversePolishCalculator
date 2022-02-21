@@ -8,7 +8,7 @@ namespace Calculator
     /// </summary>
     public class Calculator
     {
-        private Stack<ICalculationTarget> _targetStack { get; set; } = new();
+        private Stack<ICalculationTarget> TargetStack { get; set; } = new();
 
         /// <summary>
         /// コンストラクタ
@@ -16,15 +16,15 @@ namespace Calculator
         /// <param name="formula"></param>
         public Calculator(string formula)
         {
-            _targetStack.Push(new NumberTarget(null, null));
-            _targetStack.Push(new Addition());
-            _targetStack.Push(new Multiplication());
-            _targetStack.Push(new Subtraction());
-            _targetStack.Push(new Divison());
+            TargetStack.Push(new NumberTarget(null, null));
+            TargetStack.Push(new Addition(true));
+            TargetStack.Push(new Multiplication(true));
+            TargetStack.Push(new Subtraction(true));
+            TargetStack.Push(new Divison(true));
 
             foreach (var token in ReversePolishNotationParser.ParseReversePolishNotation(formula))
             {
-                _targetStack.Push(_targetStack.Pop().IsItself(token, _targetStack));
+                TargetStack.Push(TargetStack.Pop().IsItself(token, TargetStack));
             }
         }
 
@@ -33,12 +33,12 @@ namespace Calculator
         /// </summary>
         /// <returns></returns>
         public string DisplayStack()
-            => String.Join(" ", _targetStack.ToArray().Select(t => t.Display()));
+            => String.Join(" ", TargetStack.ToArray().Select(t => t.Display()));
 
         /// <summary>
         /// スタックから最初の式を取り出して計算を開始する
         /// </summary>
         public void Run()
-            => _targetStack.Pop().Execute();
+            => TargetStack.Pop().Execute(TargetStack);
     }
 }
