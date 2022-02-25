@@ -16,6 +16,8 @@
             Numerator = numerator;
         }
 
+        public NumberTarget(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
+
         /// <summary>
         /// 分母
         /// nullの場合は定義インスタンスのため、処理は行わない
@@ -27,6 +29,8 @@
         /// nullの場合は定義インスタンスのため、処理は行わない
         /// </summary>
         public double? Numerator { get; }
+
+        public bool IsDefinitionInstance { get; set; } = false;
 
         /// <summary>
         /// 指定したスタックにこのクラスのインスタンスをプッシュする
@@ -61,9 +65,8 @@
         /// 文字列が数値形式の場合は、インスタンスを作成し返す
         /// </summary>
         /// <param name="token"></param>
-        /// <param name="calculationTargets"></param>
         /// <returns></returns>
-        public ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets)
+        public ICalculationTarget IsItself(string token)
         {
             if (Double.TryParse(token, out double d))
             {
@@ -82,7 +85,7 @@
                 }
             }
 
-            return CalculationHelper.IsNetxPopedItself(token, calculationTargets);
+            return null;
         }
     }
 }

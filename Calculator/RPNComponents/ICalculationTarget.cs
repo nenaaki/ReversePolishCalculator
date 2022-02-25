@@ -7,6 +7,8 @@ namespace Calculator.RPNComponents
     /// </summary>
     internal interface ICalculationTarget
     {
+        bool IsDefinitionInstance { get; set; }
+
         /// <summary>
         /// 指定したスタックに対して処理を行う
         /// </summary>
@@ -20,13 +22,12 @@ namespace Calculator.RPNComponents
         string Display();
 
         /// <summary>
-        /// 与えられた式が自分と同じものか判定し、同じなら自分をインスタンスし返す
-        /// 異なる場合は、スタックから次の値を取り出し、その型と同じか判定する
+        /// 与えられた式が自分と同じものか判定し、同じなら自分をインスタンス化して返す
+        /// 異なる場合は、nullを返す
         /// </summary>
         /// <param name="token"></param>
-        /// <param name="calculationTargets"></param>
         /// <returns></returns>
-        ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets);
+        ICalculationTarget? IsItself(string token);
     }
 
     /// <summary>
@@ -37,7 +38,7 @@ namespace Calculator.RPNComponents
         /// <summary>
         /// 定義のみを扱うインスタンスか、実際に計算を実行するインスタンスかを判別する
         /// </summary>
-        protected bool IsDefinitionInstance { get; set; } = false;
+        public bool IsDefinitionInstance { get; set; } = false;
 
         /// <summary>
         /// 指定したスタックから2つ値を取り出し、
@@ -89,7 +90,7 @@ namespace Calculator.RPNComponents
 
         public abstract void Execute(Stack<ICalculationTarget> calculationTargets);
 
-        public abstract ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets);
+        public abstract ICalculationTarget? IsItself(string token);
 
         public class NumberModel
         {

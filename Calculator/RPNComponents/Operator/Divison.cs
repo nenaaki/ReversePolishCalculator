@@ -49,10 +49,8 @@ namespace Calculator.RPNComponents.Operator
         /// tokenが「/」かどうかを識別し、正ならば自身を返す
         /// </summary>
         /// <param name="token"></param>
-        /// <param name="calculationTargets"></param>
         /// <returns></returns>
-        public override ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets)
-            => (token == "/") ? new Divison() :
-                CalculationHelper.IsNetxPopedItself(token, calculationTargets);
+        public override ICalculationTarget? IsItself(string token)
+            => (token == "/") ? new Divison() : null;
     }
 }

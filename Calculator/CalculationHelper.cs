@@ -32,22 +32,5 @@ namespace Calculator
 
             return target2;
         }
-
-        /// <summary>
-        /// スタックから次を取り出し、文字列と同じものかのチェック及びインスタンス化を行う
-        /// </summary>
-        /// <param name="token"></param>
-        /// <param name="calculationTargets"></param>
-        /// <returns></returns>
-        internal static ICalculationTarget IsNetxPopedItself(string token, Stack<ICalculationTarget> calculationTargets)
-        {
-            var popedTarget = calculationTargets.Pop();
-
-            var target = popedTarget.IsItself(token, calculationTargets);
-
-            calculationTargets.Push(popedTarget);
-
-            return target;
-        }
     }
 }

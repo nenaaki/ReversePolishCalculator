@@ -1,5 +1,6 @@
 ﻿using Calculator.RPNComponents;
 using Calculator.RPNComponents.Operator;
+using Calculator.RPNException;
 
 namespace Calculator
 {
@@ -13,18 +14,36 @@ namespace Calculator
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        /// <param name="formula"></param>
-        public Calculator(string formula)
+        public Calculator()
         {
-            TargetStack.Push(new NumberTarget(null, null));
+            TargetStack.Push(new NumberTarget(true));
             TargetStack.Push(new Addition(true));
             TargetStack.Push(new Multiplication(true));
             TargetStack.Push(new Subtraction(true));
             TargetStack.Push(new Divison(true));
+        }
 
+        /// <summary>
+        /// 式をパースして、スタックに挿入する
+        /// </summary>
+        /// <param name="formula"></param>
+        /// <exception cref="SyntaxException"></exception>
+        public void Push(string formula)
+        {
             foreach (var token in ReversePolishNotationParser.ParseReversePolishNotation(formula))
             {
-                TargetStack.Push(TargetStack.Pop().IsItself(token, TargetStack));
+                var flag = false;
+                foreach (var target in TargetStack.ToArray())
+                {
+                    var parseResult = target.IsItself(token);
+                    if (parseResult is null) continue;
+
+                    TargetStack.Push(parseResult);
+                    flag = true;
+                    break;
+                }
+
+                if (!flag) throw new SyntaxException("不正な式が入力されています");
             }
         }
 
@@ -33,7 +52,34 @@ namespace Calculator
         /// </summary>
         /// <returns></returns>
         public string DisplayStack()
-            => String.Join(" ", TargetStack.ToArray().Select(t => t.Display()));
+            => string.Join(" ", TargetStack.ToArray().Select(t => t.Display()));
+
+        /// <summary>
+        /// スタックから1つ値を取り出す
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="RuntimeException"></exception>
+        public string Pop()
+        {
+            if (TargetStack.Any() && TargetStack.FirstOrDefault().IsDefinitionInstance)
+                throw new RuntimeException("取り出そうとしたスタックの値が組み込み定義型のため、取り出せません");
+
+            return TargetStack.Pop().Display();
+        }
+
+        /// <summary>
+        /// 定義済みの値以外をすべてスタックから削除します
+        /// </summary>
+        /// <returns></returns>
+        public string Clean()
+        {
+            while (TargetStack.Any() && !TargetStack.FirstOrDefault().IsDefinitionInstance)
+            {
+                TargetStack.Pop();
+            }
+
+            return DisplayStack();
+        }
 
         /// <summary>
         /// スタックから最初の式を取り出して計算を開始する

@@ -43,10 +43,8 @@
         /// tokenが「*」かどうかを識別し、正ならば自身を返す
         /// </summary>
         /// <param name="token"></param>
-        /// <param name="calculationTargets"></param>
         /// <returns></returns>
-        public override ICalculationTarget IsItself(string token, Stack<ICalculationTarget> calculationTargets)
-            => (token == "*") ? new Multiplication() :
-                CalculationHelper.IsNetxPopedItself(token, calculationTargets);
+        public override ICalculationTarget? IsItself(string token)
+            => (token == "*") ? new Multiplication() : null;
     }
 }

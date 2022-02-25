@@ -5,6 +5,8 @@
     /// </summary>
     internal class FunctionTarget : ICalculationTarget
     {
+        public bool IsDefinitionInstance { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public string Display()
         {
             throw new NotImplementedException();
@@ -16,6 +18,11 @@
         /// <param name="calculationTargets">操作するスタック</param>
         /// <exception cref="NotImplementedException"></exception>
         public void Execute(Stack<ICalculationTarget> calculationTargets)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICalculationTarget? IsItself(string token)
         {
             throw new NotImplementedException();
         }
