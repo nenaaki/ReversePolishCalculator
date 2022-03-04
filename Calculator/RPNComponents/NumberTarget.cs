@@ -65,12 +65,14 @@
         /// 文字列が数値形式の場合は、インスタンスを作成し返す
         /// </summary>
         /// <param name="token"></param>
+        /// <param name="result"></param>
         /// <returns></returns>
-        public ICalculationTarget IsItself(string token)
+        public bool TryParse(string token, out ICalculationTarget? result)
         {
             if (Double.TryParse(token, out double d))
             {
-                return new NumberTarget(1, d);
+                result = new NumberTarget(1, d);
+                return true;
             }
 
             var fraction = token.Split("/");
@@ -81,11 +83,13 @@
 
                 if (numeratorTryParseResult && denominatorTryParseResult)
                 {
-                    return new NumberTarget(numerator, denominator);
+                    result = new NumberTarget(numerator, denominator);
+                    return true;
                 }
             }
 
-            return null;
+            result = null;
+            return false;
         }
     }
 }

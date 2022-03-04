@@ -28,15 +28,16 @@ namespace Calculator
         /// </summary>
         /// <param name="formula"></param>
         /// <exception cref="SyntaxException"></exception>
+        [Command("push", Description = "式を入力して、スタックにプッシュすることができます。")]
         public void Push(string formula)
         {
-            foreach (var token in ReversePolishNotationParser.ParseReversePolishNotation(formula))
+            foreach (var token in RPNLexicalAnalyzer.Analyze(formula))
             {
                 var flag = false;
                 foreach (var target in TargetStack.ToArray())
                 {
-                    var parseResult = target.IsItself(token);
-                    if (parseResult is null) continue;
+                    var result = target.TryParse(token, out var parseResult);
+                    if (!result) continue;
 
                     TargetStack.Push(parseResult);
                     flag = true;
@@ -51,6 +52,7 @@ namespace Calculator
         /// スタックの状態を表示する
         /// </summary>
         /// <returns></returns>
+        [Command("display", Description = "スタックの状態を表示します。")]
         public string DisplayStack()
             => string.Join(" ", TargetStack.ToArray().Select(t => t.Display()));
 
@@ -59,6 +61,7 @@ namespace Calculator
         /// </summary>
         /// <returns></returns>
         /// <exception cref="RuntimeException"></exception>
+        [Command("pop", Description = "スタックから式を1つ取り出します。")]
         public string Pop()
         {
             if (TargetStack.Any() && TargetStack.FirstOrDefault().IsDefinitionInstance)
@@ -71,6 +74,7 @@ namespace Calculator
         /// 定義済みの値以外をすべてスタックから削除します
         /// </summary>
         /// <returns></returns>
+        [Command("clear", Description = "スタック内の式をすべて削除します。")]
         public string Clean()
         {
             while (TargetStack.Any() && !TargetStack.FirstOrDefault().IsDefinitionInstance)
@@ -82,8 +86,9 @@ namespace Calculator
         }
 
         /// <summary>
-        /// スタックから最初の式を取り出して計算を開始する
+        /// スタックから式を取り出して計算を開始する
         /// </summary>
+        [Command("run", Description = "スタック上の式を計算します。")]
         public void Run()
             => TargetStack.Pop().Execute(TargetStack);
     }

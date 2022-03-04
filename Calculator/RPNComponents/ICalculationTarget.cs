@@ -27,7 +27,7 @@ namespace Calculator.RPNComponents
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        ICalculationTarget? IsItself(string token);
+        bool TryParse(string token, out ICalculationTarget? result);
     }
 
     /// <summary>
@@ -90,7 +90,7 @@ namespace Calculator.RPNComponents
 
         public abstract void Execute(Stack<ICalculationTarget> calculationTargets);
 
-        public abstract ICalculationTarget? IsItself(string token);
+        public abstract bool TryParse(string token, out ICalculationTarget? result);
 
         public class NumberModel
         {

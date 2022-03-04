@@ -17,7 +17,7 @@
             throw new NotImplementedException();
         }
 
-        public ICalculationTarget? IsItself(string token)
+        public bool TryParse(string token, out ICalculationTarget? result)
         {
             throw new NotImplementedException();
         }

@@ -14,11 +14,11 @@
       <FileName>Calculator.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Calculator.ReversePolishNotationParser" Collapsed="true">
+  <Class Name="Calculator.RPNLexicalAnalyzer" Collapsed="true">
     <Position X="16" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
-      <FileName>ReversePolishNotationParser.cs</FileName>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RPNLexicalAnalyzer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Calculator.RPNComponents.BasicOperator">
@@ -34,7 +34,7 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAAAQAAAIAAQAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAQAAAIAAQAAABAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RPNComponents\ICalculationTarget.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -42,7 +42,7 @@
   <Class Name="Calculator.RPNComponents.ConditionTarget" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="16" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAAAQAAAAAAQAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAQAAAAAAQAAABAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RPNComponents\ConditionTarget.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -50,7 +50,7 @@
   <Class Name="Calculator.RPNComponents.FunctionTarget" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="12.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAAAQAAAAAAQAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAQAAAAAAQAAABAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RPNComponents\FunctionTarget.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -58,7 +58,7 @@
   <Class Name="Calculator.RPNComponents.NumberTarget" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="14.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAgAAAQAAAAAAYAAABAAAAACIAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAgAAAQAAAAAAYAAABAAAAACIAAAAAAAAAA=</HashCode>
       <FileName>RPNComponents\NumberTarget.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -66,28 +66,28 @@
   <Class Name="Calculator.RPNComponents.Operator.Addition">
     <Position X="0.5" Y="4.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAEAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAEAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RPNComponents\Operator\Addition.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Calculator.RPNComponents.Operator.Divison">
     <Position X="3.25" Y="4.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>CAAgAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAgAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RPNComponents\Operator\Divison.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Calculator.RPNComponents.Operator.Multiplication">
     <Position X="6" Y="4.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>CIAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RPNComponents\Operator\Multiplication.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Calculator.RPNComponents.Operator.Subtraction">
     <Position X="9.25" Y="4.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>RPNComponents\Operator\Subtraction.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -108,7 +108,7 @@
   <Interface Name="Calculator.RPNComponents.ICalculationTarget" Collapsed="true">
     <Position X="12.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAAAAAAAQAAAAAAQAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAAAAAAQAAAAAAQAAABAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>RPNComponents\ICalculationTarget.cs</FileName>
     </TypeIdentifier>
   </Interface>

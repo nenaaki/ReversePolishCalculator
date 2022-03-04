@@ -22,7 +22,14 @@
             throw new NotImplementedException();
         }
 
-        public ICalculationTarget? IsItself(string token)
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public bool TryParse(string token, out ICalculationTarget? result)
         {
             throw new NotImplementedException();
         }

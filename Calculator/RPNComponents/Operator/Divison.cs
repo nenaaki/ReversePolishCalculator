@@ -49,8 +49,18 @@ namespace Calculator.RPNComponents.Operator
         /// tokenが「/」かどうかを識別し、正ならば自身を返す
         /// </summary>
         /// <param name="token"></param>
+        /// <param name="result"></param>
         /// <returns></returns>
-        public override ICalculationTarget? IsItself(string token)
-            => (token == "/") ? new Divison() : null;
+        public override bool TryParse(string token, out ICalculationTarget? result)
+        {
+            if (token == "/")
+            {
+                result = new Divison();
+                return true;
+            }
+
+            result = null;
+            return false;
+        }
     }
 }
