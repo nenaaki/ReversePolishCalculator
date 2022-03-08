@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="denominator">分母</param>
         /// <param name="numerator">分子</param>
-        public NumberTarget(double? denominator, double? numerator)
+        public NumberTarget(double denominator, double numerator)
         {
             Denominator = denominator;
             Numerator = numerator;
@@ -22,13 +22,13 @@
         /// 分母
         /// nullの場合は定義インスタンスのため、処理は行わない
         /// </summary>
-        public double? Denominator { get; }
+        public double Denominator { get; }
 
         /// <summary>
         /// 分子
         /// nullの場合は定義インスタンスのため、処理は行わない
         /// </summary>
-        public double? Numerator { get; }
+        public double Numerator { get; }
 
         public bool IsDefinitionInstance { get; set; } = false;
 
@@ -44,14 +44,14 @@
         /// </summary>
         /// <returns></returns>
         public string DisplayWithDecimalShape()
-            => (Denominator is null || Numerator is null) ? "" : (Numerator / Denominator).ToString();
+            => (IsDefinitionInstance || Denominator is double.NaN || Numerator is double.NaN) ? "" : (Numerator / Denominator).ToString();
 
         /// <summary>
         /// 分数表示で数値の文字列を表示する
         /// </summary>
         /// <returns></returns>
         public string DisplayWithFractionShape()
-            => (Denominator is null || Numerator is null) ? "" :
+            => (IsDefinitionInstance || Denominator is double.NaN || Numerator is double.NaN) ? "" :
                 (Denominator == 1) ? Numerator.ToString() : $"{Numerator}/{Denominator}";
 
         /// <summary>

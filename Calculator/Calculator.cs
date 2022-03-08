@@ -7,9 +7,14 @@ namespace Calculator
     /// <summary>
     /// RPN計算機の統合クラス
     /// </summary>
-    public class Calculator
+    public class Calculator : ICalculator
     {
         private Stack<ICalculationTarget> TargetStack { get; set; } = new();
+
+        /// <summary>
+        /// スタックが変更された場合に、ViewModelに変更を通知する
+        /// </summary>
+        public event EventHandler<string[]> StackChanged;
 
         /// <summary>
         /// コンストラクタ
@@ -40,6 +45,7 @@ namespace Calculator
                     if (!result) continue;
 
                     TargetStack.Push(parseResult);
+                    StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
                     flag = true;
                     break;
                 }
@@ -54,7 +60,7 @@ namespace Calculator
         /// <returns></returns>
         [Command("display", Description = "スタックの状態を表示します。")]
         public string DisplayStack()
-            => string.Join(" ", TargetStack.ToArray().Select(t => t.Display()));
+            => string.Join(" ", TargetStack.Select(t => t.Display()));
 
         /// <summary>
         /// スタックから1つ値を取り出す
@@ -67,6 +73,7 @@ namespace Calculator
             if (TargetStack.Any() && TargetStack.FirstOrDefault().IsDefinitionInstance)
                 throw new RuntimeException("取り出そうとしたスタックの値が組み込み定義型のため、取り出せません");
 
+            StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
             return TargetStack.Pop().Display();
         }
 
@@ -82,6 +89,7 @@ namespace Calculator
                 TargetStack.Pop();
             }
 
+            StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
             return DisplayStack();
         }
 
@@ -90,6 +98,20 @@ namespace Calculator
         /// </summary>
         [Command("run", Description = "スタック上の式を計算します。")]
         public void Run()
-            => TargetStack.Pop().Execute(TargetStack);
+        {
+            TargetStack.Pop().Execute(TargetStack);
+            StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
+        }
+
+        /// <summary>
+        /// コマンド一覧を取得する
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        [Command("commandList", Description = "コマンド一覧を取得します。")]
+        public string[] GetAllCommand()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
