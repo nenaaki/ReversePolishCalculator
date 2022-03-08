@@ -1,11 +1,13 @@
-﻿var helpMessage = @"""pop"": Pop one stack from stackmachine
+﻿using Calculator;
+
+var helpMessage = @"""pop"": Pop one stack from stackmachine
 ""clean"": delete all stack from stackmachine
 ""push"": push formula to stackmachine
 ""display"": Display the content of stackmachine
 ""run"": Run and calulate stacks
 ""exit"": finish calculate";
 
-var calculator = new Calculator.Calculator();
+var calculator = CalculatorFactory.CreateCalculator();
 var flag = true;
 
 while (flag)
