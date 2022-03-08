@@ -7,14 +7,14 @@ namespace Calculator
     /// <summary>
     /// RPN計算機の統合クラス
     /// </summary>
-    public class Calculator : ICalculator
+    internal class Calculator : ICalculator
     {
         private Stack<ICalculationTarget> TargetStack { get; set; } = new();
 
         /// <summary>
         /// スタックが変更された場合に、ViewModelに変更を通知する
         /// </summary>
-        public event EventHandler<string[]> StackChanged;
+        public event EventHandler<string[]>? StackChanged;
 
         /// <summary>
         /// コンストラクタ
@@ -33,7 +33,6 @@ namespace Calculator
         /// </summary>
         /// <param name="formula"></param>
         /// <exception cref="SyntaxException"></exception>
-        [Command("push", Description = "式を入力して、スタックにプッシュすることができます。")]
         public void Push(string formula)
         {
             foreach (var token in RPNLexicalAnalyzer.Analyze(formula))
@@ -58,7 +57,6 @@ namespace Calculator
         /// スタックの状態を表示する
         /// </summary>
         /// <returns></returns>
-        [Command("display", Description = "スタックの状態を表示します。")]
         public string DisplayStack()
             => string.Join(" ", TargetStack.Select(t => t.Display()));
 
@@ -67,7 +65,6 @@ namespace Calculator
         /// </summary>
         /// <returns></returns>
         /// <exception cref="RuntimeException"></exception>
-        [Command("pop", Description = "スタックから式を1つ取り出します。")]
         public string Pop()
         {
             if (TargetStack.Any() && TargetStack.FirstOrDefault().IsDefinitionInstance)
@@ -81,7 +78,6 @@ namespace Calculator
         /// 定義済みの値以外をすべてスタックから削除します
         /// </summary>
         /// <returns></returns>
-        [Command("clear", Description = "スタック内の式をすべて削除します。")]
         public string Clean()
         {
             while (TargetStack.Any() && !TargetStack.FirstOrDefault().IsDefinitionInstance)
@@ -96,7 +92,6 @@ namespace Calculator
         /// <summary>
         /// スタックから式を取り出して計算を開始する
         /// </summary>
-        [Command("run", Description = "スタック上の式を計算します。")]
         public void Run()
         {
             TargetStack.Pop().Execute(TargetStack);
@@ -107,9 +102,25 @@ namespace Calculator
         /// コマンド一覧を取得する
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        [Command("commandList", Description = "コマンド一覧を取得します。")]
         public string[] GetAllCommand()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// スタックに積まれている式の数を取得する
+        /// </summary>
+        /// <returns></returns>
+        public int GetStackCount()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 文字列に一致するコマンドを実行する
+        /// </summary>
+        /// <param name="command"></param>
+        public void CallCommand(string command)
         {
             throw new NotImplementedException();
         }
