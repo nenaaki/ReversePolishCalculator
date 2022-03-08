@@ -3,7 +3,7 @@
 namespace Calculator
 {
     [AttributeUsage(AttributeTargets.Method)]
-    internal class CommandAttribute : Attribute
+    public class CommandAttribute : Attribute
     {
         private readonly string Name;
 
