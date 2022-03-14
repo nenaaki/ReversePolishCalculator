@@ -57,6 +57,7 @@ namespace Calculator
         /// スタックの状態を表示する
         /// </summary>
         /// <returns></returns>
+        [Command("display", Description = "スタックの状態を表示します。")]
         public string DisplayStack()
             => string.Join(" ", TargetStack.Select(t => t.Display()));
 
@@ -65,6 +66,7 @@ namespace Calculator
         /// </summary>
         /// <returns></returns>
         /// <exception cref="RuntimeException"></exception>
+        [Command("pop", Description = "スタックから式を1つ取り出します。")]
         public string Pop()
         {
             if (TargetStack.Any() && TargetStack.FirstOrDefault().IsDefinitionInstance)
@@ -78,6 +80,7 @@ namespace Calculator
         /// 定義済みの値以外をすべてスタックから削除します
         /// </summary>
         /// <returns></returns>
+        [Command("clear", Description = "スタック内の式をすべて削除します。")]
         public string Clean()
         {
             while (TargetStack.Any() && !TargetStack.FirstOrDefault().IsDefinitionInstance)
@@ -92,6 +95,7 @@ namespace Calculator
         /// <summary>
         /// スタックから式を取り出して計算を開始する
         /// </summary>
+        [Command("run", Description = "スタック上の式を計算します。")]
         public void Run()
         {
             TargetStack.Pop().Execute(TargetStack);
@@ -102,6 +106,7 @@ namespace Calculator
         /// コマンド一覧を取得する
         /// </summary>
         /// <returns></returns>
+        [Command("commandList", Description = "コマンド一覧を取得します。")]
         public string[] GetAllCommand()
         {
             throw new NotImplementedException();
@@ -111,6 +116,7 @@ namespace Calculator
         /// スタックに積まれている式の数を取得する
         /// </summary>
         /// <returns></returns>
+        [Command("stackCount", Description = "スタックに積まれている式の数を取得します。")]
         public int GetStackCount()
         {
             throw new NotImplementedException();
@@ -120,6 +126,7 @@ namespace Calculator
         /// 文字列に一致するコマンドを実行する
         /// </summary>
         /// <param name="command"></param>
+        [Command("call", Description = "文字列でコマンドを実行する")]
         public void CallCommand(string command)
         {
             throw new NotImplementedException();

@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
 using Calculator;
 
-// See https://aka.ms/new-console-template for more information
 Console.WriteLine("RPN Calculator (Preview)");
 
-var calculator = new Calculator.Calculator();
+var calculator = CalculatorFactory.CreateCalculator();
 
 var commands = new Dictionary<string, Action>();
 
@@ -15,10 +14,18 @@ commands["help"] = () => { Console.WriteLine(string.Join(", ", commands.Keys)); 
 
 while (calculator is not null)
 {
-    var methods = calculator.GetType().GetMethods().Where(each => each.GetCustomAttribute<CommandAttribute>() is not null && each.Name != "Push");
+    var methods = calculator.GetType().GetMethods().Where(method => method.GetCustomAttribute<CommandAttribute>() is not null);
     foreach(var method in methods)
     {
-        commands[method.Name.ToLower()] = () => method.Invoke(calculator, null);
+        var attr = method.GetCustomAttribute<CommandAttribute>();
+        if(attr != null)
+        {
+            foreach(var name in attr.GetCallName())
+            {
+                commands[name] = () => method.Invoke(calculator, null);
+            }
+
+        }
     }
 
     var stack = calculator.DisplayStack();
