@@ -44,7 +44,7 @@
         /// </summary>
         /// <returns></returns>
         public string DisplayWithDecimalShape()
-            => (IsDefinitionInstance || Denominator is double.NaN || Numerator is double.NaN) ? "" : (Numerator / Denominator).ToString();
+            => (IsDefinitionInstance || Denominator is double.NaN || Numerator is double.NaN) ? "" : ToDouble().ToString();
 
         /// <summary>
         /// 分数表示で数値の文字列を表示する
@@ -91,5 +91,11 @@
             result = null;
             return false;
         }
+
+        /// <summary>
+        /// doubleに変換します
+        /// </summary>
+        /// <returns></returns>
+        internal double ToDouble() => Numerator / Denominator;
     }
 }

@@ -10,12 +10,9 @@ namespace Calculator.RPNComponents.LogicalOperator
     {
         public static ICalculationTarget DefinitionInstance = new GreaterOrEqual { IsDefinitionInstance = true };
 
-        protected override string Name => "<";
+        protected override string Name => "<=";
 
-        public override void Execute(Stack<ICalculationTarget> calculationTargets)
-        {
-            throw new NotImplementedException();
-        }
+        public override ICalculationTarget Compare(NumberTarget value1, NumberTarget value2) => ToNumberTarget(value1.ToDouble() <= value2.ToDouble());
 
         protected override ICalculationTarget Create() => new GreaterOrEqual();
     }
