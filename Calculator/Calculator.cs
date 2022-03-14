@@ -1,4 +1,5 @@
 ﻿using Calculator.RPNComponents;
+using Calculator.RPNComponents.LogicalOperator;
 using Calculator.RPNComponents.Operator;
 using Calculator.RPNException;
 
@@ -26,6 +27,10 @@ namespace Calculator
             TargetStack.Push(new Multiplication(true));
             TargetStack.Push(new Subtraction(true));
             TargetStack.Push(new Divison(true));
+            TargetStack.Push(GreaterThan.DefinitionInstance);
+            TargetStack.Push(GreaterOrEqual.DefinitionInstance);
+            TargetStack.Push(LessThan.DefinitionInstance);
+            TargetStack.Push(LessOrEqual.DefinitionInstance);
         }
 
         /// <summary>
