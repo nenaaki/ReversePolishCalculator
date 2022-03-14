@@ -66,7 +66,7 @@ namespace Calculator
         /// <returns></returns>
         [Command("display", Description = "スタックの状態を表示します。")]
         public string DisplayStack()
-            => string.Join(" ", TargetStack.Select(t => t.Display()));
+            => string.Join(" ", TargetStack.Select(t => t.Display()).Where(t => !string.IsNullOrEmpty(t)));
 
         /// <summary>
         /// スタックから1つ値を取り出す

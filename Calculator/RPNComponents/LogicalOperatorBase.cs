@@ -11,15 +11,21 @@ namespace Calculator.RPNComponents
     {
         public override string Display() => IsDefinitionInstance ? string.Empty : Name;
 
+        [NotNull]
         protected abstract string Name { get; }
 
-        public override bool TryParse(string token, out ICalculationTarget? result)
+        public override bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
         {
-            result = token == Name ? Create() : null;
-            return result is not null;
+            if(token == Name)
+            {
+                result = Create();
+                return true;
+            }
+            result = null!;
+            return false;
         }
 
-        public override void Execute(Stack<ICalculationTarget> calculationTargets)
+        public override void Execute(IRPNStack calculationTargets)
         {
             var value1 = GetTwoNumberFromStack(calculationTargets);
             var value2 = GetTwoNumberFromStack(calculationTargets);
