@@ -49,7 +49,8 @@
         /// 文字列に一致するコマンドを実行する
         /// </summary>
         /// <param name="command"></param>
-        void CallCommand(string command);
+        /// <param name="parameters"></param>
+        bool CallCommand(string command, object?[]? parameters);
 
         /// <summary>
         /// スタックに積まれている式の数を取得する

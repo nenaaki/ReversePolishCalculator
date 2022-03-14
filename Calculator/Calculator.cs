@@ -126,18 +126,23 @@ namespace Calculator
         /// <returns></returns>
         [Command("count", Description = "スタックに積まれている式の数を取得します。")]
         public int GetStackCount()
-        {
-            throw new NotImplementedException();
-        }
+            => TargetStack.Where(target => !target.IsDefinitionInstance).Count();
 
         /// <summary>
         /// 文字列に一致するコマンドを実行する
         /// </summary>
-        /// <param name="command"></param>
+        /// <param name="commandStr"></param>
+        /// <param name="parameters"></param>
         [Command("call", Description = "文字列でコマンドを実行する")]
-        public void CallCommand(string command)
+        public bool CallCommand(string commandStr, object?[]? parameters)
         {
-            throw new NotImplementedException();
+            var command = GetType().GetMethods()
+                .FirstOrDefault(method => method?.GetCustomAttribute<CommandAttribute>()?.GetCallName().Contains(commandStr) ?? false);
+
+            if (command == null) return false;
+
+            command.Invoke(this, parameters);
+            return true;
         }
     }
 }

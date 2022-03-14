@@ -43,6 +43,22 @@ while (flag)
             calculator.Run();
             break;
 
+        case "commands":
+            Console.WriteLine(calculator.GetAllCommand());
+            break;
+
+        case "count":
+            Console.WriteLine(calculator.GetStackCount());
+            break;
+
+        case "call":
+            var command = Console.ReadLine();
+            string? arg;
+            if (command is null) break;
+            if (command == "push") arg = Console.ReadLine();
+            Console.WriteLine(calculator.CallCommand(command, args));
+            break;
+
         case "h":
         case "H":
             Console.WriteLine(helpMessage);
