@@ -1,4 +1,5 @@
 ﻿using Calculator.RPNException;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Calculator.RPNComponents
 {
@@ -13,7 +14,7 @@ namespace Calculator.RPNComponents
         /// 指定したスタックに対して処理を行う
         /// </summary>
         /// <param name="calculationTargets"></param>
-        void Execute(Stack<ICalculationTarget> calculationTargets);
+        void Execute(IRPNStack calculationTargets);
 
         /// <summary>
         /// 画面に実際に表示する値に変換する
@@ -26,8 +27,9 @@ namespace Calculator.RPNComponents
         /// 異なる場合は、nullを返す
         /// </summary>
         /// <param name="token"></param>
+        /// <param name="result"></param>
         /// <returns></returns>
-        bool TryParse(string token, out ICalculationTarget? result);
+        bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result);
     }
 
     /// <summary>
@@ -46,7 +48,7 @@ namespace Calculator.RPNComponents
         /// <param name="calculationTargets"></param>
         /// <param name="calcFunc"></param>
         /// <exception cref="Exception"></exception>
-        public void Execute(Stack<ICalculationTarget> calculationTargets, Func<NumberTarget, NumberTarget, NumberModel> calcFunc)
+        public void Execute(IRPNStack calculationTargets, Func<NumberTarget, NumberTarget, NumberModel> calcFunc)
         {
             if (IsDefinitionInstance) throw new RuntimeException("式が不正です");
 
@@ -68,7 +70,7 @@ namespace Calculator.RPNComponents
                 new NumberTarget(basicCalcResult.Denominator, basicCalcResult.Numerator));
         }
 
-        protected static NumberTarget GetTwoNumberFromStack(Stack<ICalculationTarget> calculationTargets)
+        private static NumberTarget GetTwoNumberFromStack(IRPNStack calculationTargets)
         {
             var arg1 = calculationTargets.Pop();
             if (arg1 is not NumberTarget numberTarget1)
@@ -88,9 +90,9 @@ namespace Calculator.RPNComponents
 
         public abstract string Display();
 
-        public abstract void Execute(Stack<ICalculationTarget> calculationTargets);
+        public abstract void Execute(IRPNStack calculationTargets);
 
-        public abstract bool TryParse(string token, out ICalculationTarget? result);
+        public abstract bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result);
 
         public class NumberModel
         {

@@ -1,11 +1,16 @@
-﻿using System.Collections;
+﻿using Calculator.RPNComponents;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Calculator
 {
-    internal interface IRPNStack<T> : ICollection, IEnumerable<T>
+    internal interface IRPNStack : IEnumerable<ICalculationTarget>
     {
-        void Push(T item);
+        void Push(ICalculationTarget item);
 
-        T Pop();
+        ICalculationTarget Pop();
+
+        bool TryPeek([NotNullWhen(true)] out ICalculationTarget item);
+
+        ICalculationTarget[] ToArray();
     }
 }

@@ -6,6 +6,11 @@
     public interface ICalculator
     {
         /// <summary>
+        /// スタックが変更された場合に、ViewModelに変更を通知する
+        /// </summary>
+        event EventHandler<string[]>? StackChanged;
+
+        /// <summary>
         /// 式をパースして、スタックに挿入する
         /// </summary>
         /// <param name="formula"></param>

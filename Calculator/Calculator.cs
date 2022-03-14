@@ -10,7 +10,7 @@ namespace Calculator
     /// </summary>
     internal class Calculator : ICalculator
     {
-        private Stack<ICalculationTarget> TargetStack { get; set; } = new();
+        private IRPNStack TargetStack { get; set; }
 
         /// <summary>
         /// スタックが変更された場合に、ViewModelに変更を通知する
@@ -20,8 +20,10 @@ namespace Calculator
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public Calculator()
+        public Calculator(IRPNStack targets)
         {
+            TargetStack = targets;
+
             TargetStack.Push(new NumberTarget(true));
             TargetStack.Push(new Addition(true));
             TargetStack.Push(new Multiplication(true));
@@ -74,7 +76,7 @@ namespace Calculator
         [Command("pop", Description = "スタックから式を1つ取り出します。")]
         public string Pop()
         {
-            if (TargetStack.Any() && TargetStack.FirstOrDefault().IsDefinitionInstance)
+            if (TargetStack.Any() && TargetStack.TryPeek(out var result) && result.IsDefinitionInstance)
                 throw new RuntimeException("取り出そうとしたスタックの値が組み込み定義型のため、取り出せません");
 
             StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
@@ -88,7 +90,7 @@ namespace Calculator
         [Command("clear", Description = "スタック内の式をすべて削除します。")]
         public string Clean()
         {
-            while (TargetStack.Any() && !TargetStack.FirstOrDefault().IsDefinitionInstance)
+            while (TargetStack.Any() && TargetStack.TryPeek(out var result) && !result.IsDefinitionInstance)
             {
                 TargetStack.Pop();
             }

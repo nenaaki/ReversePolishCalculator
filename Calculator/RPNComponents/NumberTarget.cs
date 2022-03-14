@@ -1,4 +1,6 @@
-﻿namespace Calculator.RPNComponents
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Calculator.RPNComponents
 {
     /// <summary>
     /// 数値全般を表すクラス
@@ -36,7 +38,7 @@
         /// 指定したスタックにこのクラスのインスタンスをプッシュする
         /// </summary>
         /// <param name="stackTarget">操作するスタック</param>
-        public void Execute(Stack<ICalculationTarget> stackTarget)
+        public void Execute(IRPNStack stackTarget)
             => stackTarget.Push(this);
 
         /// <summary>
@@ -67,9 +69,9 @@
         /// <param name="token"></param>
         /// <param name="result"></param>
         /// <returns></returns>
-        public bool TryParse(string token, out ICalculationTarget? result)
+        public bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
         {
-            if (Double.TryParse(token, out double d))
+            if (double.TryParse(token, out double d))
             {
                 result = new NumberTarget(1, d);
                 return true;
@@ -78,8 +80,8 @@
             var fraction = token.Split("/");
             if (fraction.Length == 2)
             {
-                var numeratorTryParseResult = Double.TryParse(fraction[0], out double numerator);
-                var denominatorTryParseResult = Double.TryParse(fraction[1], out double denominator);
+                var numeratorTryParseResult = double.TryParse(fraction[0], out double numerator);
+                var denominatorTryParseResult = double.TryParse(fraction[1], out double denominator);
 
                 if (numeratorTryParseResult && denominatorTryParseResult)
                 {
@@ -88,7 +90,7 @@
                 }
             }
 
-            result = null;
+            result = default!;
             return false;
         }
 

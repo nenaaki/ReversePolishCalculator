@@ -1,4 +1,6 @@
-﻿namespace Calculator.RPNComponents
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Calculator.RPNComponents
 {
     /// <summary>
     /// ユーザーが自作した関数を扱うクラス
@@ -17,7 +19,7 @@
         /// </summary>
         /// <param name="calculationTargets">操作するスタック</param>
         /// <exception cref="NotImplementedException"></exception>
-        public void Execute(Stack<ICalculationTarget> calculationTargets)
+        public void Execute(IRPNStack calculationTargets)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +31,7 @@
         /// <param name="result"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public bool TryParse(string token, out ICalculationTarget? result)
+        public bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
         {
             throw new NotImplementedException();
         }

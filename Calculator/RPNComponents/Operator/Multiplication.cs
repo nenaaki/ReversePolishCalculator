@@ -1,4 +1,6 @@
-﻿namespace Calculator.RPNComponents.Operator
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Calculator.RPNComponents.Operator
 {
     /// <summary>
     /// 乗算を扱うクラス
@@ -22,7 +24,7 @@
         /// </summary>
         /// <param name="calculationTargets">操作するスタック</param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Execute(Stack<ICalculationTarget> calculationTargets)
+        public override void Execute(IRPNStack calculationTargets)
             => Execute(calculationTargets, ExecuteMultiplication);
 
         private NumberModel ExecuteMultiplication(NumberTarget numberTarget1, NumberTarget numberTarget2)
@@ -45,7 +47,7 @@
         /// <param name="token"></param>
         /// <param name="result"></param>
         /// <returns></returns>
-        public override bool TryParse(string token, out ICalculationTarget? result)
+        public override bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
         {
             if (token == "*")
             {
@@ -53,7 +55,7 @@
                 return true;
             }
 
-            result = null;
+            result = default!;
             return false;
         }
     }
