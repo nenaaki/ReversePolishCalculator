@@ -1,4 +1,5 @@
 ﻿using Calculator.RPNException;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Calculator.RPNComponents.Operator
 {
@@ -24,7 +25,7 @@ namespace Calculator.RPNComponents.Operator
         /// </summary>
         /// <param name="calculationTargets">操作するスタック</param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Execute(Stack<ICalculationTarget> calculationTargets)
+        public override void Execute(IRPNStack calculationTargets)
             => Execute(calculationTargets, ExecuteDivision);
 
         private NumberModel ExecuteDivision(NumberTarget numberTarget1, NumberTarget numberTarget2)
@@ -51,7 +52,7 @@ namespace Calculator.RPNComponents.Operator
         /// <param name="token"></param>
         /// <param name="result"></param>
         /// <returns></returns>
-        public override bool TryParse(string token, out ICalculationTarget? result)
+        public override bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
         {
             if (token == "/")
             {
@@ -59,7 +60,7 @@ namespace Calculator.RPNComponents.Operator
                 return true;
             }
 
-            result = null;
+            result = default!;
             return false;
         }
     }

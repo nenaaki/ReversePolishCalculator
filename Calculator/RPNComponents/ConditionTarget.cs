@@ -1,4 +1,6 @@
-﻿namespace Calculator.RPNComponents
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Calculator.RPNComponents
 {
     /// <summary>
     /// 条件式を扱うクラス
@@ -12,12 +14,12 @@
             throw new NotImplementedException();
         }
 
-        public void Execute(Stack<ICalculationTarget> calculationTargets)
+        public void Execute(IRPNStack calculationTargets)
         {
             throw new NotImplementedException();
         }
 
-        public bool TryParse(string token, out ICalculationTarget? result)
+        public bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
         {
             throw new NotImplementedException();
         }

@@ -10,6 +10,6 @@
         /// </summary>
         /// <returns></returns>
         public static ICalculator CreateCalculator()
-            => new Calculator();
+            => new Calculator(new RPNStack());
     }
 }

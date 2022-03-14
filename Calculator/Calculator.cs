@@ -9,7 +9,7 @@ namespace Calculator
     /// </summary>
     internal class Calculator : ICalculator
     {
-        private Stack<ICalculationTarget> TargetStack { get; set; } = new();
+        private IRPNStack TargetStack { get; set; }
 
         /// <summary>
         /// スタックが変更された場合に、ViewModelに変更を通知する
@@ -19,8 +19,10 @@ namespace Calculator
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public Calculator()
+        public Calculator(IRPNStack targets)
         {
+            TargetStack = targets;
+
             TargetStack.Push(new NumberTarget(true));
             TargetStack.Push(new Addition(true));
             TargetStack.Push(new Multiplication(true));

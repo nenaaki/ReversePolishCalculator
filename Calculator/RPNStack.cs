@@ -1,38 +1,89 @@
-﻿using System.Collections;
+﻿using Calculator.RPNComponents;
+using System.Collections;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Calculator
 {
-    internal class RPNStack<T> : IRPNStack<T>
+    internal class RPNStack : IRPNStack
     {
-        public int Count => throw new NotImplementedException();
+        private readonly List<ICalculationTarget> _targets = new();
 
-        public bool IsSynchronized => throw new NotImplementedException();
-
-        public object SyncRoot => throw new NotImplementedException();
-
-        public void CopyTo(Array array, int index)
+        public ICalculationTarget Pop()
         {
-            throw new NotImplementedException();
+            var item = _targets.LastOrDefault();
+
+            if (item == null)
+                throw new InvalidOperationException("Itemが空です。");
+
+            _targets.RemoveAt(_targets.Count - 1);
+            return item;
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public void Push(ICalculationTarget item)
+            => _targets.Add(item);
+
+        public bool TryPeek([NotNullWhen(true)] out ICalculationTarget item)
         {
-            throw new NotImplementedException();
+            var targetItem = _targets.ElementAtOrDefault(_targets.Count - 1);
+
+            if (targetItem is not null)
+            {
+                item = targetItem;
+                return true;
+            }
+
+            item = default!;
+            return false;
         }
 
-        public T Pop()
-        {
-            throw new NotImplementedException();
-        }
+        public ICalculationTarget[] ToArray() => _targets.ToArray();
 
-        public void Push(T item)
-        {
-            throw new NotImplementedException();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => new RPNStackEnumerator(this);
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerator<ICalculationTarget> GetEnumerator() => new RPNStackEnumerator(this);
+
+        public class RPNStackEnumerator : IEnumerator<ICalculationTarget>
         {
-            throw new NotImplementedException();
+            private int currentIndex;
+
+            private readonly RPNStack _stack;
+
+            public RPNStackEnumerator(RPNStack stack)
+            {
+                _stack = stack;
+                currentIndex = 0;
+            }
+
+            public ICalculationTarget Current
+            {
+                get
+                {
+                    if (currentIndex < 0 || currentIndex >= _stack._targets.Count)
+                        throw new ArgumentOutOfRangeException();
+                    return _stack._targets[currentIndex];
+                }
+            }
+
+            object IEnumerator.Current => Current;
+
+            public void Dispose()
+            {
+                currentIndex = 0;
+                GC.SuppressFinalize(this);
+            }
+
+            public bool MoveNext()
+            {
+                var nextIndex = currentIndex + 1;
+                if (nextIndex < 0 || nextIndex >= _stack._targets.Count)
+                    return false;
+
+                currentIndex++;
+                return true;
+            }
+
+            public void Reset() => currentIndex = 0;
         }
     }
 }
