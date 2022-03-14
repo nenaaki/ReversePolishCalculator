@@ -1,4 +1,5 @@
 ﻿using Calculator.RPNComponents;
+using Calculator.RPNComponents.LogicalOperator;
 using Calculator.RPNComponents.Operator;
 using Calculator.RPNException;
 
@@ -28,6 +29,10 @@ namespace Calculator
             TargetStack.Push(new Multiplication(true));
             TargetStack.Push(new Subtraction(true));
             TargetStack.Push(new Divison(true));
+            TargetStack.Push(GreaterThan.DefinitionInstance);
+            TargetStack.Push(GreaterOrEqual.DefinitionInstance);
+            TargetStack.Push(LessThan.DefinitionInstance);
+            TargetStack.Push(LessOrEqual.DefinitionInstance);
         }
 
         /// <summary>
@@ -61,7 +66,7 @@ namespace Calculator
         /// <returns></returns>
         [Command("display", Description = "スタックの状態を表示します。")]
         public string DisplayStack()
-            => string.Join(" ", TargetStack.Select(t => t.Display()));
+            => string.Join(" ", TargetStack.Select(t => t.Display()).Where(t => !string.IsNullOrEmpty(t)));
 
         /// <summary>
         /// スタックから1つ値を取り出す

@@ -17,9 +17,7 @@ namespace Calculator
         {
             if (target1 < target2)
             {
-                var temp = target1;
-                target1 = target2;
-                target2 = temp;
+                (target2, target1) = (target1, target2);
             }
 
             var r = target1 % target2;

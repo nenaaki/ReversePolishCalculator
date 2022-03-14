@@ -31,7 +31,7 @@ while (calculator is not null)
     var stack = calculator.DisplayStack();
     Console.WriteLine(stack);
 
-    Console.Write(">");
+    Console.Write($">");
 
     var input = Console.ReadLine();
 
@@ -39,7 +39,7 @@ while (calculator is not null)
 
     try
     {
-        if (commands.TryGetValue(input.ToLower(), out var command))
+        if (commands.TryGetValue(input, out var command))
         {
             command();
             continue;

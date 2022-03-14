@@ -70,7 +70,7 @@ namespace Calculator.RPNComponents
                 new NumberTarget(basicCalcResult.Denominator, basicCalcResult.Numerator));
         }
 
-        private static NumberTarget GetTwoNumberFromStack(IRPNStack calculationTargets)
+        protected static NumberTarget GetTwoNumberFromStack(IRPNStack calculationTargets)
         {
             var arg1 = calculationTargets.Pop();
             if (arg1 is not NumberTarget numberTarget1)
