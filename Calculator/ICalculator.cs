@@ -43,7 +43,7 @@
         /// コマンド一覧を取得する
         /// </summary>
         /// <returns></returns>
-        string[] GetAllCommand();
+        string GetAllCommand();
 
         /// <summary>
         /// 文字列に一致するコマンドを実行する

@@ -2,6 +2,7 @@
 using Calculator.RPNComponents.LogicalOperator;
 using Calculator.RPNComponents.Operator;
 using Calculator.RPNException;
+using System.Reflection;
 
 namespace Calculator
 {
@@ -113,17 +114,17 @@ namespace Calculator
         /// コマンド一覧を取得する
         /// </summary>
         /// <returns></returns>
-        [Command("commandList", Description = "コマンド一覧を取得します。")]
-        public string[] GetAllCommand()
-        {
-            throw new NotImplementedException();
-        }
+        [Command("commands", Description = "コマンド一覧を取得します。")]
+        public string GetAllCommand()
+            => string.Join("\n", GetType().GetMethods()
+                .Where(method => method.GetCustomAttribute<CommandAttribute>()?.GetCallName()?.Any() ?? false)
+                .Select(method => method.GetCustomAttribute<CommandAttribute>()?.GetCallName()[0]!));
 
         /// <summary>
         /// スタックに積まれている式の数を取得する
         /// </summary>
         /// <returns></returns>
-        [Command("stackCount", Description = "スタックに積まれている式の数を取得します。")]
+        [Command("count", Description = "スタックに積まれている式の数を取得します。")]
         public int GetStackCount()
         {
             throw new NotImplementedException();
