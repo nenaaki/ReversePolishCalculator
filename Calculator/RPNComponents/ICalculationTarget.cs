@@ -1,4 +1,5 @@
 ﻿using Calculator.RPNException;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Calculator.RPNComponents
 {
@@ -26,8 +27,9 @@ namespace Calculator.RPNComponents
         /// 異なる場合は、nullを返す
         /// </summary>
         /// <param name="token"></param>
+        /// <param name="result"></param>
         /// <returns></returns>
-        bool TryParse(string token, out ICalculationTarget? result);
+        bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result);
     }
 
     /// <summary>
@@ -90,7 +92,7 @@ namespace Calculator.RPNComponents
 
         public abstract void Execute(Stack<ICalculationTarget> calculationTargets);
 
-        public abstract bool TryParse(string token, out ICalculationTarget? result);
+        public abstract bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result);
 
         public class NumberModel
         {

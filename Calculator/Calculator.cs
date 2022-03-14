@@ -67,7 +67,7 @@ namespace Calculator
         /// <exception cref="RuntimeException"></exception>
         public string Pop()
         {
-            if (TargetStack.Any() && TargetStack.FirstOrDefault().IsDefinitionInstance)
+            if (TargetStack.Any() && TargetStack.TryPeek(out var result) && result.IsDefinitionInstance)
                 throw new RuntimeException("取り出そうとしたスタックの値が組み込み定義型のため、取り出せません");
 
             StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
@@ -80,7 +80,7 @@ namespace Calculator
         /// <returns></returns>
         public string Clean()
         {
-            while (TargetStack.Any() && !TargetStack.FirstOrDefault().IsDefinitionInstance)
+            while (TargetStack.Any() && TargetStack.TryPeek(out var result) && !result.IsDefinitionInstance)
             {
                 TargetStack.Pop();
             }
