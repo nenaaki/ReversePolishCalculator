@@ -1,6 +1,7 @@
-﻿using System.Reflection;
+﻿﻿using System.Reflection;
 using Calculator.RPNComponents;
 using Calculator.RPNComponents.FlowControl;
+using Calculator.RPNComponents.Function;
 using Calculator.RPNComponents.LogicalOperator;
 using Calculator.RPNComponents.Operator;
 using Calculator.RPNException;
@@ -20,6 +21,12 @@ namespace Calculator
         public event EventHandler<string[]>? StackChanged;
 
         /// <summary>
+        /// パース時のモード
+        /// 定義モードまたは、通常モード
+        /// </summary>
+        internal static ParseMode Mode { get; set; }
+
+        /// <summary>
         /// コンストラクタ
         /// </summary>
         public Calculator(IRPNStack targets)
@@ -36,6 +43,10 @@ namespace Calculator
             TargetStack.Push(LessThan.DefinitionInstance);
             TargetStack.Push(LessOrEqual.DefinitionInstance);
             TargetStack.Push(Loop.DefinitionInstance);
+            TargetStack.Push(new FunctionTarget(true));
+            TargetStack.Push(new FuncInitTarget(true));
+            TargetStack.Push(new FuncArgTarget(true));
+            TargetStack.Push(new FuncNameTarget(true));
         }
 
         /// <summary>
@@ -79,11 +90,27 @@ namespace Calculator
         [Command("pop", Description = "スタックから式を1つ取り出します。")]
         public string Pop()
         {
-            if (TargetStack.Any() && TargetStack.TryPeek(out var result) && result.IsDefinitionInstance)
-                throw new RuntimeException("取り出そうとしたスタックの値が組み込み定義型のため、取り出せません");
+            (var displayTarget, var result) = Pop("");
+
+            if (result is FunctionTarget)
+            {
+                while (result is not FuncInitTarget)
+                {
+                    (displayTarget, result) = Pop(displayTarget);
+                }
+            }
 
             StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
-            return TargetStack.Pop().Display();
+            return displayTarget;
+        }
+
+        private (string, ICalculationTarget) Pop(string displayTarget = "")
+        {
+            var peekResult = TargetStack.TryPeek(out var result);
+            if (peekResult && result.IsDefinitionInstance)
+                throw new RuntimeException("取り出そうとしたスタックの値が組み込み定義型のため、取り出せません");
+
+            return (TargetStack.Pop().Display() + displayTarget, result);
         }
 
         /// <summary>
