@@ -1,8 +1,9 @@
-﻿using Calculator.RPNComponents;
+﻿using System.Reflection;
+using Calculator.RPNComponents;
+using Calculator.RPNComponents.FlowControl;
 using Calculator.RPNComponents.LogicalOperator;
 using Calculator.RPNComponents.Operator;
 using Calculator.RPNException;
-using System.Reflection;
 
 namespace Calculator
 {
@@ -34,6 +35,7 @@ namespace Calculator
             TargetStack.Push(GreaterOrEqual.DefinitionInstance);
             TargetStack.Push(LessThan.DefinitionInstance);
             TargetStack.Push(LessOrEqual.DefinitionInstance);
+            TargetStack.Push(Loop.DefinitionInstance);
         }
 
         /// <summary>
