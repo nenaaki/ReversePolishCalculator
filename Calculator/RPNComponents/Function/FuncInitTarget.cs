@@ -7,10 +7,7 @@ namespace Calculator.RPNComponents.Function
     {
         public bool IsDefinitionInstance { get; set; } = false;
 
-        public FuncInitTarget(bool isDefinitionInstance)
-        {
-            IsDefinitionInstance = isDefinitionInstance;
-        }
+        public FuncInitTarget(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
         public string Display() => IsDefinitionInstance ? "" : ":";
 
@@ -23,6 +20,9 @@ namespace Calculator.RPNComponents.Function
 
             if (token == ":")
             {
+                if (Calculator.Mode == ParseMode.Definition)
+                    throw new SyntaxException("関数定義中に「:」は使用できません");
+
                 Calculator.Mode = ParseMode.Definition;
                 result = new FuncInitTarget(false);
                 return true;

@@ -100,6 +100,9 @@ namespace Calculator
                 }
             }
 
+            if (result is FuncInitTarget)
+                Mode = ParseMode.Regular;
+
             StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
             return displayTarget;
         }
@@ -135,6 +138,9 @@ namespace Calculator
         [Command("run", Description = "スタック上の式を計算します。")]
         public void Run()
         {
+            if (Mode == ParseMode.Definition)
+                throw new RuntimeException("関数の定義式の途中です");
+
             TargetStack.Pop().Execute(TargetStack);
             StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
         }

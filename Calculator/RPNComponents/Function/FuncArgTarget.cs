@@ -7,14 +7,11 @@ namespace Calculator.RPNComponents.Function
     {
         public bool IsDefinitionInstance { get; set; } = false;
 
-        private readonly int ArgumentNumber;
+        public readonly int ArgumentNumber;
 
         public FuncArgTarget(int argumentNumber) => ArgumentNumber = argumentNumber;
 
-        public FuncArgTarget(bool isDefinitionInstance)
-        {
-            IsDefinitionInstance = isDefinitionInstance;
-        }
+        public FuncArgTarget(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
         public string Display() => IsDefinitionInstance ? "" : "$" + ArgumentNumber;
 

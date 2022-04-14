@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPNCalculator.CLI", "RPNCalculator.CLI\RPNCalculator.CLI.csproj", "{28D34D9F-DFD7-47FC-816E-365C06DF0A6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPNCalculator.CLI", "RPNCalculator.CLI\RPNCalculator.CLI.csproj", "{28D34D9F-DFD7-47FC-816E-365C06DF0A6A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6293A5E4-2CA7-4D2D-87D4-B5249DA29D53} = {6293A5E4-2CA7-4D2D-87D4-B5249DA29D53}
 	EndProjectSection

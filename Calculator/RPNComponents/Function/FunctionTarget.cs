@@ -14,15 +14,15 @@ namespace Calculator.RPNComponents.Function
         /// コンストラクタ
         /// </summary>
         /// <param name="isDefinitionInstance"></param>
-        public FunctionTarget(bool isDefinitionInstance)
-        {
-            IsDefinitionInstance = isDefinitionInstance;
-        }
+        public FunctionTarget(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
         public string Display() => IsDefinitionInstance ? "" : "func";
 
         public void Execute(IRPNStack calculationTargets)
-            => throw new RuntimeException("定義式を実行できません：func");
+        {
+            calculationTargets.Push(this);
+            throw new RuntimeException("定義式を実行できません：func");
+        }
 
         public bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
         {

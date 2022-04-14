@@ -8,6 +8,9 @@ namespace Calculator.RPNComponents
     /// </summary>
     internal interface ICalculationTarget
     {
+        /// <summary>
+        /// スタックに積むことができる要素の型定義を表現したクラスかどうかを表す
+        /// </summary>
         bool IsDefinitionInstance { get; set; }
 
         /// <summary>

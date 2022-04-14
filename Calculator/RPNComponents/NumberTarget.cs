@@ -71,7 +71,7 @@ namespace Calculator.RPNComponents
         /// <returns></returns>
         public bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
         {
-            if (double.TryParse(token, out double d))
+            if (double.TryParse(token, out var d))
             {
                 result = new NumberTarget(1, d);
                 return true;
@@ -80,8 +80,8 @@ namespace Calculator.RPNComponents
             var fraction = token.Split("/");
             if (fraction.Length == 2)
             {
-                var numeratorTryParseResult = double.TryParse(fraction[0], out double numerator);
-                var denominatorTryParseResult = double.TryParse(fraction[1], out double denominator);
+                var numeratorTryParseResult = double.TryParse(fraction[0], out var numerator);
+                var denominatorTryParseResult = double.TryParse(fraction[1], out var denominator);
 
                 if (numeratorTryParseResult && denominatorTryParseResult)
                 {
