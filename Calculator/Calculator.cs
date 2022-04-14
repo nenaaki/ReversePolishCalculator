@@ -1,4 +1,4 @@
-﻿﻿using System.Reflection;
+﻿using System.Reflection;
 using Calculator.RPNComponents;
 using Calculator.RPNComponents.FlowControl;
 using Calculator.RPNComponents.Function;
@@ -33,20 +33,20 @@ namespace Calculator
         {
             TargetStack = targets;
 
-            TargetStack.Push(new NumberTarget(true));
-            TargetStack.Push(new Addition(true));
-            TargetStack.Push(new Multiplication(true));
-            TargetStack.Push(new Subtraction(true));
-            TargetStack.Push(new Divison(true));
+            TargetStack.Push(NumberTarget.DefinitionInstance);
+            TargetStack.Push(Addition.DefinitionInstance);
+            TargetStack.Push(Multiplication.DefinitionInstance);
+            TargetStack.Push(Subtraction.DefinitionInstance);
+            TargetStack.Push(Divison.DefinitionInstance);
             TargetStack.Push(GreaterThan.DefinitionInstance);
             TargetStack.Push(GreaterOrEqual.DefinitionInstance);
             TargetStack.Push(LessThan.DefinitionInstance);
             TargetStack.Push(LessOrEqual.DefinitionInstance);
             TargetStack.Push(Loop.DefinitionInstance);
-            TargetStack.Push(new FunctionTarget(true));
-            TargetStack.Push(new FuncInitTarget(true));
-            TargetStack.Push(new FuncArgTarget(true));
-            TargetStack.Push(new FuncNameTarget(true));
+            TargetStack.Push(FunctionTarget.DefinitionInstance);
+            TargetStack.Push(FuncInitTarget.DefinitionInstance);
+            TargetStack.Push(FuncArgTarget.DefinitionInstance);
+            TargetStack.Push(FuncNameTarget.DefinitionInstance);
         }
 
         /// <summary>

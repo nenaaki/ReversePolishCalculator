@@ -20,6 +20,8 @@ namespace Calculator.RPNComponents
 
         public NumberTarget(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
+        internal static NumberTarget DefinitionInstance => new NumberTarget(true);
+
         /// <summary>
         /// 分母
         /// nullの場合は定義インスタンスのため、処理は行わない

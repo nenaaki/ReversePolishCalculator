@@ -9,6 +9,8 @@ namespace Calculator.RPNComponents.Function
 
         public FuncInitTarget(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
+        internal static FuncInitTarget DefinitionInstance => new FuncInitTarget(true);
+
         public string Display() => IsDefinitionInstance ? "" : ":";
 
         public void Execute(IRPNStack calculationTargets)

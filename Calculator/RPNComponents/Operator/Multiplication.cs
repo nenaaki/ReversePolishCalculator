@@ -19,6 +19,8 @@ namespace Calculator.RPNComponents.Operator
         /// <param name="isDefinitionInstance"></param>
         public Multiplication(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
+        internal static Multiplication DefinitionInstance => new Multiplication(true);
+
         /// <summary>
         /// 指定したスタックから2つの値を取り出し、乗算を行ってスタックに返す
         /// </summary>

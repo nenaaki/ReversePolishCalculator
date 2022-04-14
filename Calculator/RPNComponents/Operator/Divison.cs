@@ -20,6 +20,8 @@ namespace Calculator.RPNComponents.Operator
         /// <param name="isDefinitionInstance"></param>
         public Divison(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
+        internal static Divison DefinitionInstance => new Divison(true);
+
         /// <summary>
         /// 指定したスタックから値を2つ取り出し、除算を行ってスタックに返す
         /// </summary>

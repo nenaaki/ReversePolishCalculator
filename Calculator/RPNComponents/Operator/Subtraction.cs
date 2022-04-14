@@ -19,6 +19,8 @@ namespace Calculator.RPNComponents.Operator
         /// <param name="isDefinitionInstance"></param>
         public Subtraction(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
+        internal static Subtraction DefinitionInstance => new Subtraction(true);
+
         /// <summary>
         /// 指定したスタックから2つの値を取り出し、減算をしてスタックに返す
         /// </summary>
