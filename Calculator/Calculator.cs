@@ -43,6 +43,8 @@ namespace Calculator
             TargetStack.Push(LessThan.DefinitionInstance);
             TargetStack.Push(LessOrEqual.DefinitionInstance);
             TargetStack.Push(Loop.DefinitionInstance);
+            TargetStack.Push(If.DefinitionInstance);
+            TargetStack.Push(End.DefinitionInstance);
             TargetStack.Push(FunctionTarget.DefinitionInstance);
             TargetStack.Push(FuncInitTarget.DefinitionInstance);
             TargetStack.Push(FuncArgTarget.DefinitionInstance);
