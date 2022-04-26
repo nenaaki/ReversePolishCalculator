@@ -92,6 +92,8 @@ namespace Calculator.RPNComponents.Function
             {
                 calculationTargets.Push(target);
             }
+
+            calculationTargets.Pop().Execute(calculationTargets);
         }
 
         public bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
