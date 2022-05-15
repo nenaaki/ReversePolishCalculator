@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPNCalculator.CLI", "RPNCal
 		{6293A5E4-2CA7-4D2D-87D4-B5249DA29D53} = {6293A5E4-2CA7-4D2D-87D4-B5249DA29D53}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPNCalculator.API", "RPNCalculator.API\RPNCalculator.API.csproj", "{E4DD1914-8424-4A92-8B84-B928984BA159}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{28D34D9F-DFD7-47FC-816E-365C06DF0A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28D34D9F-DFD7-47FC-816E-365C06DF0A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28D34D9F-DFD7-47FC-816E-365C06DF0A6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4DD1914-8424-4A92-8B84-B928984BA159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4DD1914-8424-4A92-8B84-B928984BA159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4DD1914-8424-4A92-8B84-B928984BA159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4DD1914-8424-4A92-8B84-B928984BA159}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

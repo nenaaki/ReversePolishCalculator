@@ -171,15 +171,14 @@ namespace Calculator
         /// <param name="commandStr"></param>
         /// <param name="parameters"></param>
         [Command("call", Description = "文字列でコマンドを実行する")]
-        public bool CallCommand(string commandStr, object?[]? parameters)
+        public object? CallCommand(string commandStr, object?[]? parameters)
         {
             var command = GetType().GetMethods()
                 .FirstOrDefault(method => method?.GetCustomAttribute<CommandAttribute>()?.GetCallName().Contains(commandStr) ?? false);
 
             if (command == null) return false;
 
-            command.Invoke(this, parameters);
-            return true;
+            return command.Invoke(this, parameters);
         }
     }
 }

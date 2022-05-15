@@ -50,7 +50,7 @@
         /// </summary>
         /// <param name="command"></param>
         /// <param name="parameters"></param>
-        bool CallCommand(string command, object?[]? parameters);
+        object? CallCommand(string command, object?[]? parameters);
 
         /// <summary>
         /// スタックに積まれている式の数を取得する
