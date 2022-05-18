@@ -1,29 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Calculator.RPNComponents.FlowControl
+﻿namespace Calculator.RPNComponents.FlowControl
 {
-    internal abstract class FlowControlBase<T> : BasicOperator
+    internal abstract class FlowControlBase<T> : CalculatonTargetBase
         where T : class, ICalculationTarget, new()
     {
         static public T DefinitionInstance = new T { IsDefinitionInstance = true };
-        /// <summary>
-        /// 名称(小文字)
-        /// </summary>
-        public abstract string Name { get; }
-
-        public sealed override string Display() => IsDefinitionInstance ? "" : Name;
-
-
-        public sealed override bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
-        {
-            if (token.ToLower() == Name)
-            {
-                result = new T();
-                return true;
-            }
-            result = default!;
-            return false;
-        }
 
         protected NumberTarget GetParameter(IRPNStack calculationTargets)
         {
@@ -38,5 +18,7 @@ namespace Calculator.RPNComponents.FlowControl
             }
             return param;
         }
+
+        protected override ICalculationTarget Create() => new T();
     }
 }

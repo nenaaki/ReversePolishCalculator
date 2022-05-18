@@ -2,7 +2,7 @@
 {
     internal class If : FlowControlBase<If>
     {
-        public override string Name => "if";
+        protected override string Name => "if";
 
         public override void Execute(IRPNStack calculationTargets)
         {

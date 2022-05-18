@@ -5,7 +5,7 @@ namespace Calculator.RPNComponents.Function
 {
     internal class FuncNameTarget : ICalculationTarget
     {
-        public bool IsDefinitionInstance { get; set; } = false;
+        public bool IsDefinitionInstance { get; init; } = false;
 
         /// <summary>
         /// 関数定義の要素かどうかを表す
