@@ -1,4 +1,5 @@
 import React from "react";
+import { RecoilRoot } from "recoil";
 import "./App.css";
 import Content from "./Component/Content/Content";
 import Header from "./Component/Header/Header";
@@ -6,8 +7,10 @@ import Header from "./Component/Header/Header";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Header />
-      <Content />
+      <RecoilRoot>
+        <Header />
+        <Content />
+      </RecoilRoot>
     </div>
   );
 };
