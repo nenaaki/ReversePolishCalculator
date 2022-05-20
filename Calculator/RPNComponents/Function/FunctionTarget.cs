@@ -8,7 +8,7 @@ namespace Calculator.RPNComponents.Function
     /// </summary>
     internal class FunctionTarget : ICalculationTarget
     {
-        public bool IsDefinitionInstance { get; set; } = false;
+        public bool IsDefinitionInstance { get; init; } = false;
 
         /// <summary>
         /// コンストラクタ

@@ -7,7 +7,7 @@ namespace Calculator.RPNComponents
     /// </summary>
     internal class ConditionTarget : ICalculationTarget
     {
-        public bool IsDefinitionInstance { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsDefinitionInstance { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
 
         public string Display()
         {

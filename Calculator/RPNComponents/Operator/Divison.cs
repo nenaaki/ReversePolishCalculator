@@ -1,12 +1,11 @@
 ﻿using Calculator.RPNException;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Calculator.RPNComponents.Operator
 {
     /// <summary>
     /// 除算を扱うクラス
     /// </summary>
-    internal class Divison : BasicOperator
+    internal class Divison : OperatorBase
     {
         /// <summary>
         /// コンストラクタ
@@ -14,23 +13,11 @@ namespace Calculator.RPNComponents.Operator
         public Divison()
         { }
 
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        /// <param name="isDefinitionInstance"></param>
-        public Divison(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
+        internal static ICalculationTarget DefinitionInstance => new Divison { IsDefinitionInstance = true };
 
-        internal static Divison DefinitionInstance => new Divison(true);
+        protected override string Name => "/";
 
-        /// <summary>
-        /// 指定したスタックから値を2つ取り出し、除算を行ってスタックに返す
-        /// </summary>
-        /// <param name="calculationTargets">操作するスタック</param>
-        /// <exception cref="NotImplementedException"></exception>
-        public override void Execute(IRPNStack calculationTargets)
-            => Execute(calculationTargets, ExecuteDivision);
-
-        private NumberModel ExecuteDivision(NumberTarget numberTarget1, NumberTarget numberTarget2)
+        protected override NumberModel Calcurate(NumberTarget numberTarget1, NumberTarget numberTarget2)
         {
             if (numberTarget2.Numerator == 0) throw new RuntimeException("0で値を割ることはできません");
 
@@ -41,29 +28,6 @@ namespace Calculator.RPNComponents.Operator
             };
         }
 
-        /// <summary>
-        /// 実際の画面に表示する形式「/」を返す
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public override string Display() => (IsDefinitionInstance) ? "" : "/";
-
-        /// <summary>
-        /// tokenが「/」かどうかを識別し、正ならば自身を返す
-        /// </summary>
-        /// <param name="token"></param>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        public override bool TryParse(string token, [NotNullWhen(true)] out ICalculationTarget result)
-        {
-            if (token == "/")
-            {
-                result = new Divison();
-                return true;
-            }
-
-            result = default!;
-            return false;
-        }
+        protected override ICalculationTarget Create() => new Subtraction();
     }
 }

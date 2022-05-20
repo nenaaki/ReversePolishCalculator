@@ -34,7 +34,7 @@ namespace Calculator.RPNComponents
         /// </summary>
         public double Numerator { get; }
 
-        public bool IsDefinitionInstance { get; set; } = false;
+        public bool IsDefinitionInstance { get; init; } = false;
 
         /// <summary>
         /// 指定したスタックにこのクラスのインスタンスをプッシュする

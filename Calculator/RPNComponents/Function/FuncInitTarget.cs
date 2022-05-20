@@ -5,7 +5,7 @@ namespace Calculator.RPNComponents.Function
 {
     internal class FuncInitTarget : ICalculationTarget
     {
-        public bool IsDefinitionInstance { get; set; } = false;
+        public bool IsDefinitionInstance { get; init; } = false;
 
         public FuncInitTarget(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 

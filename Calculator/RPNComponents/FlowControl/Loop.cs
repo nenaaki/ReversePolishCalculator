@@ -2,7 +2,7 @@
 {
     internal class Loop : FlowControlBase<Loop>
     {
-        public override string Name => "loop";
+        protected override string Name => "loop";
 
 
         public override void Execute(IRPNStack calculationTargets)
