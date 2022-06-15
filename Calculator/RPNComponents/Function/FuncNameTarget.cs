@@ -27,7 +27,7 @@ namespace Calculator.RPNComponents.Function
             IsFuncDefinitionInstance = isFuncDefinitionInstance;
         }
 
-        internal static FuncNameTarget DefinitionInstance => new FuncNameTarget(true, false);
+        internal static FuncNameTarget DefinitionInstance => new(true, false);
 
         public string Display() => IsDefinitionInstance ? "" : Name;
 

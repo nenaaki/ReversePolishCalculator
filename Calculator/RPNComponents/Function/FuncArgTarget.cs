@@ -13,7 +13,7 @@ namespace Calculator.RPNComponents.Function
 
         public FuncArgTarget(bool isDefinitionInstance) => IsDefinitionInstance = isDefinitionInstance;
 
-        internal static FuncArgTarget DefinitionInstance => new FuncArgTarget(true);
+        internal static FuncArgTarget DefinitionInstance => new(true);
 
         public string Display() => IsDefinitionInstance ? "" : "$" + ArgumentNumber;
 

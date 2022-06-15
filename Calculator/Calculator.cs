@@ -115,7 +115,7 @@ namespace Calculator
             if (peekResult && result.IsDefinitionInstance)
                 throw new RuntimeException("取り出そうとしたスタックの値が組み込み定義型のため、取り出せません");
 
-            return (TargetStack.Pop().Display() + displayTarget, result);
+            return (displayTarget == "") ? (TargetStack.Pop().Display(), result) : (TargetStack.Pop().Display() + " " + displayTarget, result);
         }
 
         /// <summary>
