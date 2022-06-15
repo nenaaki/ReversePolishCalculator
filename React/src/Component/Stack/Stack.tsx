@@ -1,29 +1,29 @@
 import React from "react";
-import { Card, ListGroup } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 import { displayStack } from "../../Common/RPNApiCaller";
 import { StackState } from "../../Store/StackAtom";
+import Presenter from "./Presenter";
 import "./Stack.css";
 
 const Stack = () => {
   const [stack, setStack] = useRecoilState(StackState);
 
   React.useEffect(() => {
-    displayStack().then((result) => {
-      setStack(result);
-    });
-  }, []);
+    displayStack()
+      .then((result) => {
+        setStack(result);
+      })
+      .catch((e) => {
+        setStack(["Stackの更新に失敗しました"]);
+      });
+  }, [setStack]);
 
-  return (
-    <Card className="stack-container">
-      <Card.Header>Stackの状態</Card.Header>
-      <ListGroup>
-        {stack?.map((item, key) => (
-          <ListGroup.Item key={key}>{item}</ListGroup.Item>
-        ))}
-      </ListGroup>
-    </Card>
-  );
+  const children = stack?.map((item, key) => (
+    <ListGroup.Item key={key}>{item}</ListGroup.Item>
+  ));
+
+  return <Presenter children={children} />;
 };
 
 export default Stack;

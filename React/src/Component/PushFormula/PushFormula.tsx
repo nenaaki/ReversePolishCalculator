@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
-import { on } from "stream";
 import {
   clearStack,
   displayStack,
@@ -9,8 +8,7 @@ import {
   pushFormula,
 } from "../../Common/RPNApiCaller";
 import { StackState } from "../../Store/StackAtom";
-import CommonCol from "../CommonCol/CommonCol";
-import PushCol from "../PushCol/PushCol";
+import Presenter from "./Presenter";
 
 const PushFormula: React.FC = () => {
   const SUCCESS_MESSAGE = "成功しました";
@@ -37,6 +35,7 @@ const PushFormula: React.FC = () => {
         );
       });
   };
+
   const onClearButtonClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
     initResult();
@@ -50,6 +49,7 @@ const PushFormula: React.FC = () => {
         setClearResult(`Stackの初期化に失敗しました。${e.message}`);
       });
   };
+
   const onRunButtonClick = (e: React.SyntheticEvent) => {
     e.preventDefault();
     initResult();
@@ -103,31 +103,25 @@ const PushFormula: React.FC = () => {
   };
 
   return (
-    <form onSubmit={onPushButtonClick}>
-      <PushCol
-        content={content}
-        onInputChange={onPushInputboxChange}
-        onButtonClick={onPushButtonClick}
-      />
-      <CommonCol
-        label="Stackから取り出された値"
-        buttonContent="Pop"
-        onClickFunc={onPopButtonClick}
-        result={popResult}
-      />
-      <CommonCol
-        label="結果"
-        buttonContent="Clear"
-        onClickFunc={onClearButtonClick}
-        result={clearResult}
-      />
-      <CommonCol
-        label="実行結果"
-        buttonContent="Run"
-        onClickFunc={onRunButtonClick}
-        result={runResult}
-      />
-    </form>
+    <Presenter
+      push={{
+        content: content,
+        onButtonClick: onPushButtonClick,
+        onInputChange: onPushInputboxChange,
+      }}
+      pop={{
+        result: popResult,
+        onClickFunc: onPopButtonClick,
+      }}
+      clear={{
+        result: clearResult,
+        onClickFunc: onClearButtonClick,
+      }}
+      run={{
+        result: runResult,
+        onClickFunc: onRunButtonClick,
+      }}
+    />
   );
 };
 
