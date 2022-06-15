@@ -131,6 +131,7 @@ namespace Calculator
             }
 
             StackChanged?.Invoke(this, TargetStack.Select(t => t.Display()).ToArray());
+            Mode = ParseMode.Regular;
             return DisplayStack();
         }
 
