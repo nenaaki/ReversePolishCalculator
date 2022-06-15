@@ -22,6 +22,9 @@
         </StackLayout>
 
         <CollectionView Grid.Row="2" ItemsSource="{Binding Path=Items, Mode=OneWay}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="4" VerticalItemSpacing="4" Span="8" />
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border Stroke="Blue" StrokeThickness="1">
